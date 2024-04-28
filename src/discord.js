@@ -4,7 +4,6 @@ const MAX_MESSAGE_LENGTH = 72;
 module.exports.send = (id, token, repo, url, commits, size, pusher) => {
   return new Promise((resolve, reject) => {
     let client;
-    const username = repo.replace(/(discord)/gi, '******');
     console.log('Preparing Webhook...');
     try {
       client = new WebhookClient({
@@ -12,7 +11,7 @@ module.exports.send = (id, token, repo, url, commits, size, pusher) => {
         token: token,
       });
       client.send({
-        username: username,
+        username: 'No Sleep RP',
         embeds: [createEmbed(url, commits, size, pusher)],
       }).then(() => {
         console.log('Successfully sent the message!');
