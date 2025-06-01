@@ -1,5 +1,5 @@
 const { MessageEmbed, WebhookClient } = require('discord.js');
-const MAX_MESSAGE_LENGTH = 72;
+const MAX_MESSAGE_LENGTH = 225;
 
 module.exports.send = (id, token, repo, url, commits, size, pusher) => {
   return new Promise((resolve, reject) => {
@@ -37,7 +37,7 @@ function createEmbed(url, commits, size, pusher) {
   return new MessageEmbed()
     .setColor(0xa970ff)
     .setAuthor({
-      name: `⚡ ${pusher} pushed ${size} commit${size === 1 ? '' : 's'}`,
+      name: `🔧 ${pusher} pushed ${size} update${size === 1 ? '' : 's'}`,
       iconURL: `https://github.com/${pusher}.png?size=64`,
       url: url,
     })
@@ -48,18 +48,17 @@ function createEmbed(url, commits, size, pusher) {
 function getChangeLog(commits, size) {
   let changelog = '';
   for (let i = 0; i < commits.length; i++) {
-    if (i > 7) {
+    if (i > 15) {
       changelog += `+ ${size - i} more...\n`;
       break;
     }
 
     const commit = commits[i];
-    const sha = commit.id.substring(0, 6);
     const message =
       commit.message.length > MAX_MESSAGE_LENGTH
         ? commit.message.substring(0, MAX_MESSAGE_LENGTH) + '...'
         : commit.message;
-    changelog += `[\`${sha}\`](${commit.url}) — ${message} ([\`${commit.author.username}\`](https://github.com/${commit.author.username}))\n`;
+    changelog += `• ${message}\n`;
   }
 
   return changelog;
