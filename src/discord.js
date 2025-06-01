@@ -42,7 +42,7 @@ function createEmbed(url, commits, size, pusher) {
       url: 'https://nosleeprp.com/',
     })
     .setDescription(`${getChangeLog(commits, size)}`)
-    .setTimestamp(Date.parse(latest.timestamp));
+    .setTimestamp();
 }
 
 function getChangeLog(commits, size) {
