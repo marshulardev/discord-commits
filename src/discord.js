@@ -39,7 +39,7 @@ function createEmbed(url, commits, size, pusher) {
     .setAuthor({
       name: `🔧 ${pusher} pushed ${size} update${size === 1 ? '' : 's'}`,
       iconURL: `https://github.com/${pusher}.png?size=64`,
-      url: url,
+      url: 'https://nosleeprp.com/',
     })
     .setDescription(`${getChangeLog(commits, size)}`)
     .setTimestamp(Date.parse(latest.timestamp));
