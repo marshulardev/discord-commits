@@ -38,7 +38,7 @@ function createEmbed(url, commits, size, pusher) {
   return new MessageEmbed()
     .setColor(0xffbb00)
     .setAuthor({
-      name: `:hammer: ${pusher} pushed ${size} update${size === 1 ? '' : 's'}`,
+      name: `🔨 ${pusher} pushed ${size} update${size === 1 ? '' : 's'}`,
       iconURL: `https://github.com/${pusher}.png?size=64`,
       url: 'https://google.com/', // testing
     })
