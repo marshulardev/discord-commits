@@ -40,27 +40,28 @@ function createEmbed(url, commits, size, pusher) {
     .setAuthor({
       name: `🔨 ${pusher} pushed ${size} update${size === 1 ? '' : 's'}`,
       iconURL: `https://github.com/${pusher}.png?size=64`,
-      //url: 'https://google.com/', // testing
+      url: url,
     })
     .setDescription(`${getChangeLog(commits, size)}`)
     .setTimestamp();
 }
 
 function getChangeLog(commits, size) {
-  let changelog = '';
-  for (let i = 0; i < commits.length; i++) {
-    if (i > 15) {
-      changelog += `+ ${size - i} more...\n`;
-      break;
+  let changelog = ''
+  for (const i in commits) {
+    if (i > 7) {
+      changelog += `+ ${size - i} more...\n`
+      break
     }
 
-    const commit = commits[i];
+    const commit = commits[i]
+    const sha = commit.id.substring(0, 6)
     const message =
       commit.message.length > MAX_MESSAGE_LENGTH
         ? commit.message.substring(0, MAX_MESSAGE_LENGTH) + '...'
-        : commit.message;
-    changelog += `• ${message}\n`;
+        : commit.message
+    changelog += `[\`${sha}\`](${commit.url}) — ${message}\n`
   }
 
-  return changelog;
+  return changelog
 }
