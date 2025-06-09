@@ -4,6 +4,7 @@ const MAX_MESSAGE_LENGTH = 225;
 module.exports.send = (id, token, repo, url, commits, size, pusher) => {
   return new Promise((resolve, reject) => {
     let client;
+    const username = repo.replace(/(discord)/gi, '******')
     console.log('Preparing Webhook...');
     try {
       client = new WebhookClient({
@@ -11,7 +12,7 @@ module.exports.send = (id, token, repo, url, commits, size, pusher) => {
         token: token,
       });
       client.send({
-        username: 'No Sleep RP',
+        username: username,
         embeds: [createEmbed(url, commits, size, pusher)],
       }).then(() => {
         console.log('Successfully sent the message!');
@@ -35,11 +36,11 @@ function createEmbed(url, commits, size, pusher) {
   }
   const latest = commits[0];
   return new MessageEmbed()
-    .setColor(0xa970ff)
+    .setColor(0xffbb00)
     .setAuthor({
-      name: `🔧 ${pusher} pushed ${size} update${size === 1 ? '' : 's'}`,
+      name: `:hammer: ${pusher} pushed ${size} update${size === 1 ? '' : 's'}`,
       iconURL: `https://github.com/${pusher}.png?size=64`,
-      url: 'https://nosleeprp.com/',
+      url: 'https://google.com/', // testing
     })
     .setDescription(`${getChangeLog(commits, size)}`)
     .setTimestamp();
