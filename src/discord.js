@@ -60,7 +60,8 @@ function getChangeLog(commits, size) {
       commit.message.length > MAX_MESSAGE_LENGTH
         ? commit.message.substring(0, MAX_MESSAGE_LENGTH) + '...'
         : commit.message
-    changelog += `[\`${sha}\`](${commit.url}) — ${message}\n`
+    // changelog += `[\`${sha}\`](${commit.url}) — [${message}]\n`
+    changelog += `— [${message}](${commit.url})\n`
   }
 
   return changelog
