@@ -40,7 +40,7 @@ function createEmbed(url, commits, size, pusher) {
     .setAuthor({
       name: `🔨 ${pusher} pushed ${size} update${size === 1 ? '' : 's'}`,
       iconURL: `https://github.com/${pusher}.png?size=64`,
-      url: 'https://google.com/', // testing
+      //url: 'https://google.com/', // testing
     })
     .setDescription(`${getChangeLog(commits, size)}`)
     .setTimestamp();
